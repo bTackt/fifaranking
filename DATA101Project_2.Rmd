@@ -1,0 +1,46 @@
+---
+title: "Fifa Ranking"
+author: "D.O"
+date: "October 17, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
+options(width=63)
+
+library(dplyr)
+library(ggplot2)
+```
+
+
+dplyr reference: https://dplyr.tidyverse.org/reference/index.html
+
+#Read Data
+Some relevant columns in the dataset: (copied fromhttps://www.kaggle.com/tadhgfitzgerald/fifa-international-soccer-mens-ranking-1993now/version/3)
+
+  *rank
+  *country_full
+  *country_abrv
+  *total_points
+  *previous_points
+  *rank_change
+  *cur_year_avg
+  *cur_year_avg_weighted
+  *last_year_avg
+  *last_year_avg_weighted
+  *two_year_ago_avg
+  *two_year_ago_weighted
+  *three_year_ago_avg
+  *three_year_ago_weighted
+  *confederation
+  *rank_date
+
+```{r}
+men_fifa_ranking <- read.csv("fifaranking.csv")
+attach(men_fifa_ranking)
+dim(men_fifa_ranking)
+head(men_fifa_ranking)
+str(men_fifa_ranking)
+````
