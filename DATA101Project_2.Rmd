@@ -20,6 +20,8 @@ dplyr reference: https://dplyr.tidyverse.org/reference/index.html
 #Read Data
 Some relevant columns in the dataset: (copied fromhttps://www.kaggle.com/tadhgfitzgerald/fifa-international-soccer-mens-ranking-1993now/version/3)
 
+International Men's Ranking (August 1993 - June 2018) Updated June 7th 2018
+
   *rank
   *country_full
   *country_abrv
@@ -43,4 +45,19 @@ attach(men_fifa_ranking)
 dim(men_fifa_ranking)
 head(men_fifa_ranking)
 str(men_fifa_ranking)
+mfifa<- men_fifa_ranking[, c('rank','country_full','rank_change','previous_points', 'rank_date','confederation')]
+mfifa
+head(mfifa)
+tail(mfifa)
 ````
+
+#Exploratory Data Analysis (EDA)
+```{r}
+nrow(mfifa)
+ncol(mfifa)
+country <- select(mfifa, country_full) %>% unique %>% nrow
+country
+table(mfifa$confederation) %>% barplot(col = "blue")
+
+````
+
