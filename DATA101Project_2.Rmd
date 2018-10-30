@@ -67,15 +67,27 @@ table(mfifa$confederation) %>% barplot(col = "blue")
 Confed <- mfifa$confederation
 unique(Confed)
 uefa <- filter(mfifa, confederation =='UEFA')
-head(uefa)
+head(uefa,10)
 afc <- filter(mfifa, confederation =='AFC')
-head(afc)
+head(afc,10)
 caf <- filter(mfifa, confederation =='CAF')
-head(caf)
+head(caf,10)
 conmebol <- filter(mfifa, confederation =='CONMEBOL')
-head(conmebol)
+head(conmebol,10)
 concacaf<- filter(mfifa, confederation =='CONCACAF')
-head(concacaf)
+head(concacaf,10)
 ofc<- filter(mfifa, confederation =='OFC')
-head(ofc)
+head(ofc,10)
+````
+#Boxplots
+```{r}
+ggplot(data = mfifa, mapping = aes(x = confederation, y = rank, fill = factor(confederation))) + 
+  geom_boxplot() +  coord_flip()
+````
+
+
+#Scatterplots
+```{r}
+ggplot(data = mfifa) +
+  geom_point(mapping = aes(x = confederation, y = rank, color = confederation) )
 ````
