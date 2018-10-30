@@ -38,7 +38,8 @@ International Men's Ranking (August 1993 - June 2018) Updated June 7th 2018
   *three_year_ago_weighted
   *confederation
   *rank_date
-
+  
+# Reading Data
 ```{r}
 men_fifa_ranking <- read.csv("fifaranking.csv")
 attach(men_fifa_ranking)
@@ -61,3 +62,20 @@ table(mfifa$confederation) %>% barplot(col = "blue")
 
 ````
 
+#Filter Confederation
+```{r}
+Confed <- mfifa$confederation
+unique(Confed)
+uefa <- filter(mfifa, confederation =='UEFA')
+head(uefa)
+afc <- filter(mfifa, confederation =='AFC')
+head(afc)
+caf <- filter(mfifa, confederation =='CAF')
+head(caf)
+conmebol <- filter(mfifa, confederation =='CONMEBOL')
+head(conmebol)
+concacaf<- filter(mfifa, confederation =='CONCACAF')
+head(concacaf)
+ofc<- filter(mfifa, confederation =='OFC')
+head(ofc)
+````
