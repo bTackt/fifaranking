@@ -20,6 +20,7 @@ dplyr reference: https://dplyr.tidyverse.org/reference/index.html
 #Read Data
 Some relevant columns in the dataset: (copied fromhttps://www.kaggle.com/tadhgfitzgerald/fifa-international-soccer-mens-ranking-1993now/version/3)
 
+Fédération Internationale de Football Association (FIFA)
 International Men's Ranking (August 1993 - June 2018) Updated June 7th 2018
 
   *rank
@@ -47,7 +48,6 @@ dim(men_fifa_ranking)
 head(men_fifa_ranking)
 str(men_fifa_ranking)
 mfifa<- men_fifa_ranking[, c('rank','country_full','rank_change','previous_points', 'rank_date','confederation')]
-mfifa
 head(mfifa)
 tail(mfifa)
 ````
@@ -57,7 +57,6 @@ tail(mfifa)
 nrow(mfifa)
 ncol(mfifa)
 country <- select(mfifa, country_full) %>% unique %>% nrow
-country
 table(mfifa$confederation) %>% barplot(col = "blue")
 
 ````
@@ -90,4 +89,24 @@ ggplot(data = mfifa, mapping = aes(x = confederation, y = rank, fill = factor(co
 ```{r}
 ggplot(data = mfifa) +
   geom_point(mapping = aes(x = confederation, y = rank, color = confederation) )
+
 ````
+
+#Top Ten from each Confederations
+```{r}
+top_uefa <- head(uefa,10)
+top_afc <- head(afc,10)
+top_caf <- head(caf,10)
+top_conmebol <- head(conmebol,10)
+top_concacaf <- head(concacaf,10)
+top_ofc <- head(ofc,10)
+top_conferation <- rbind(top_afc,top_caf,top_concacaf,top_conmebol,top_ofc,top_uefa)
+top_conferation
+
+ggplot(data = top_conferation, mapping = aes(x = confederation, y = rank, fill = factor(confederation))) + 
+  geom_boxplot() +  coord_flip()
+
+ggplot(data = top_conferation) +
+  geom_point(mapping = aes(x = confederation, y = rank, color = confederation) )
+````
+
