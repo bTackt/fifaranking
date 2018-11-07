@@ -5,11 +5,7 @@ date: "October 17, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-opts_chunk$set(fig.align="center", fig.height=5.5, fig.width=6, collapse=TRUE, comment="", prompt=TRUE)
-options(width=63)
-
+```{r}
 library(dplyr)
 library(ggplot2)
 ```
@@ -50,6 +46,7 @@ str(men_fifa_ranking)
 mfifa<- men_fifa_ranking[, c('rank','country_full','rank_change','previous_points', 'rank_date','confederation')]
 head(mfifa)
 tail(mfifa)
+unique(mfifa$rank_date) #oh my we have a lot of snapshots by time
 ````
 
 #Exploratory Data Analysis (EDA)
@@ -59,6 +56,9 @@ ncol(mfifa)
 country <- select(mfifa, country_full) %>% unique %>% nrow
 table(mfifa$confederation) %>% barplot(col = "blue")
 
+mfifa %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
 ````
 
 #Filter Confederation
@@ -67,16 +67,45 @@ Confed <- mfifa$confederation
 unique(Confed)
 uefa <- filter(mfifa, confederation =='UEFA')
 head(uefa,10)
+
+uefa %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
+
 afc <- filter(mfifa, confederation =='AFC')
 head(afc,10)
+
+afc %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
+
 caf <- filter(mfifa, confederation =='CAF')
 head(caf,10)
+
+caf %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
+
 conmebol <- filter(mfifa, confederation =='CONMEBOL')
 head(conmebol,10)
+
+conmebol %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
+
 concacaf<- filter(mfifa, confederation =='CONCACAF')
 head(concacaf,10)
+
+concacaf %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
+
 ofc<- filter(mfifa, confederation =='OFC')
 head(ofc,10)
+
+ofc %>% group_by(country_full) %>% 
+        mutate(x=1:n()) %>%
+        ggplot(aes(x=rank_date, y=rank,group=country_full, color=country_full)) + geom_line() + theme(legend.position="none") + scale_y_reverse()
 ````
 #Boxplots
 ```{r}
